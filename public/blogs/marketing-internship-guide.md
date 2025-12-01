@@ -1,0 +1,4 @@
+# Human Resources Internship: Building Your HR Career
+
+# Human Resources Internship\n\nHuman Resources is the heart of any organization. HR professionals manage recruitment, employee development, compensation, and organizational culture.\n\n## HR Functions\n\nCore functions include recruitment, employee relations, compensation, training, performance management, and compliance.\n\n## Essential Skills\n\nHR knowledge includes employment law and HR best practices. Technical skills include HRIS, applicant tracking systems, and data analysis.\n\n## Building Experience\n\nCreate hands-on projects including recruitment campaigns, employee engagement initiatives, training programs, compensation analysis, and policy development.\n\n## Interview Preparation\n\nExplain your understanding of employment law. Discuss your approach to employee relations and recruitment.\n\n## Conclusion\n\nAn HR internship is an excellent way to launch a career in human resources.
+
