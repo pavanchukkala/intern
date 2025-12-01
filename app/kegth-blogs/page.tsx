@@ -1,16 +1,18 @@
-
-import Link from 'next/link';
-import NavBar from '@/components/NavBar';
-import Footer from '@/components/Footer';
+import fs from "fs";
+import path from "path";
+import NavBar from "@/components/NavBar";
+import Footer from "@/components/Footer";
 
 export const metadata = {
-  title: 'Kegth Blogs Library',
-  description: 'Merged blog library for Kegth - rich SEO content'
+  title: "Kegth Blog Library",
+  description: "Merged blog library for Kegth - rich SEO content",
 };
 
-export default async function Page() {
-  const res = await fetch('/blogs/index.json');
-  const posts = await res.json();
+export default function Page() {
+  // Read index.json directly from public folder
+  const filePath = path.join(process.cwd(), "public", "blogs", "index.json");
+  const jsonData = fs.readFileSync(filePath, "utf-8");
+  const posts = JSON.parse(jsonData);
 
   return (
     <div>
@@ -18,37 +20,55 @@ export default async function Page() {
       <main className="container mx-auto px-4 py-8">
         <header className="text-center mb-8">
           <h1 className="text-4xl font-bold">Kegth Blog Library</h1>
-          <p className="mt-2 text-gray-600">Search and explore our expanded blog collection.</p>
+          <p className="mt-2 text-gray-600">
+            Search and explore our expanded blog collection.
+          </p>
         </header>
 
-        <div className="mb-6">
-          <input id="search" placeholder="Search posts..." className="w-full p-3 border rounded" onChange={() => {}} />
-          <p className="text-sm text-gray-500 mt-2">Client-side search available below.</p>
-        </div>
+        <input
+          id="search"
+          placeholder="Search posts..."
+          className="w-full p-3 border rounded mb-6"
+        />
 
-        <ul className="grid md:grid-cols-2 gap-6">
+        <ul className="grid md:grid-cols-2 gap-6" id="post-list">
           {posts.map((p) => (
-            <li key={p.slug} className="bg-white dark:bg-gray-800 p-6 rounded shadow">
-              <h2 className="text-2xl font-semibold"><Link href={`/kegth-blogs/${p.slug}`}>{p.title}</Link></h2>
+            <li
+              key={p.slug}
+              className="bg-white dark:bg-gray-800 p-6 rounded shadow"
+              data-title={p.title.toLowerCase()}
+            >
+              <h2 className="text-2xl font-semibold">
+                <a href={`/kegth-blogs/${p.slug}`}>{p.title}</a>
+              </h2>
               <p className="mt-2 text-gray-600">{p.excerpt}</p>
-              <div className="mt-4"><Link href={`/kegth-blogs/${p.slug}`} className="text-indigo-600">Read more →</Link></div>
+              <a
+                href={`/kegth-blogs/${p.slug}`}
+                className="text-indigo-600 inline-block mt-4"
+              >
+                Read more →
+              </a>
             </li>
           ))}
         </ul>
       </main>
       <Footer />
-      <script dangerouslySetInnerHTML={{__html: `
-        // simple client-side search
-        const input = document.getElementById('search');
-        input.addEventListener('input', function(e){
-          const q = e.target.value.toLowerCase();
-          const items = document.querySelectorAll('ul > li');
-          items.forEach(li=>{
-            const t = li.querySelector('h2').innerText.toLowerCase();
-            li.style.display = t.includes(q) ? 'block' : 'none';
-          });
-        });
-      `}} />
+
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+            const input = document.getElementById('search');
+            input.addEventListener('input', function(e){
+              const value = e.target.value.toLowerCase();
+              const items = document.querySelectorAll('#post-list li');
+              items.forEach(li=>{
+                const title = li.getAttribute('data-title');
+                li.style.display = title.includes(value) ? '' : 'none';
+              });
+            });
+          `,
+        }}
+      />
     </div>
   );
 }
