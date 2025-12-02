@@ -56,7 +56,7 @@ const ContactPage = () => {
                         </div>
                         <div>
                             <h3 className="font-semibold text-lg text-gray-900 dark:text-white">Email</h3>
-                            <a href="mailto:kegth.official@gmail.com" className="text-sky-600 dark:text-sky-400 hover:underline">kegth.official@gmail.com</a>
+                            <a href="mailto:kegth.official@gmail.com" className="text-sky-600 dark:text-sky-400 hover:underline">kegthgroup@gmail.com</a>
                         </div>
                     </div>
                     <div className="flex items-center space-x-4">
