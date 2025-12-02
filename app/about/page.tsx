@@ -1,88 +1,146 @@
+"use client";
 
-import { Metadata } from 'next';
-import NavBar from '@/components/NavBar';
-import Footer from '@/components/Footer';
-import Link from 'next/link';
+import Image from "next/image";
+import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: 'About Kegth | Our Mission to Empower the Next Generation',
-  description: 'Learn about Kegth\'s mission to bridge the gap between education and industry, providing students and professionals with the tools and opportunities they need to succeed.',
-};
+export default function AboutPage() {
+  const currentYear = new Date().getFullYear();
 
-const AboutPage = () => {
   return (
-    <div className="bg-gray-50 dark:bg-gray-900 min-h-screen flex flex-col">
-        <NavBar />
-        <main className="flex-grow">
-            <header className="bg-white dark:bg-gray-800 shadow-sm">
-                <div className="container mx-auto py-16 px-4 text-center">
-                <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight">Our Mission</h1>
-                <p className="mt-4 text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-                    To empower the next generation of talent by connecting them with meaningful opportunities that kickstart their careers.
-                </p>
-                </div>
-            </header>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+      {/* Hero Section */}
+      <section className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-16 px-4">
+        <div className="container mx-auto text-center">
+       <Image
+  src="/BasicAssets/logo.jpg"
+  alt="Internsship Logo"
+  width={160}
+  height={160}
+  unoptimized
+/>
 
-            <div className="py-16">
-                <div className="container mx-auto px-4">
-                    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden">
-                        <div className="lg:grid lg:grid-cols-2 lg:gap-8 items-center">
-                            <div className="p-8 lg:p-12">
-                                <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white">
-                                    <span className="block">Bridging the Gap Between</span>
-                                    <span className="block text-sky-600 dark:text-sky-400">Education & Industry</span>
-                                </h2>
-                                <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">
-                                    Kegth was born from a simple but powerful idea: that every student and aspiring professional deserves a fair chance to succeed. We saw a disconnect between the skills learned in academia and the practical experience required by the industry. We set out to build a bridge.
-                                </p>
-                                <p className="mt-4 text-lg text-gray-600 dark:text-gray-400">
-                                    Our platform is more than just an internship board; it is a comprehensive ecosystem designed to provide you with the tools, resources, and opportunities needed to thrive in today’s competitive landscape.
-                                </p>
-                            </div>
-                            <div className="p-8">
-                                <img
-                                    className="rounded-lg shadow-md w-full h-full object-cover"
-                                    src="/BasicAssets/mission.jpg"
-                                    alt="Team collaborating in an office"
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+          <h1 className="text-5xl font-extrabold mb-4">Welcome to Internship Platform</h1>
+          <p className="text-xl max-w-3xl mx-auto">
+            A unique bridge connecting internship-providing companies with ambitious candidates.
+            Explore a secure, fast, and user-friendly experience—without any login or sign-up hassle.
+          </p>
+        </div>
+      </section>
 
-                <div className="mt-20">
-                    <div className="container mx-auto px-4">
-                        <div className="text-center">
-                            <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white">Our Core Values</h2>
-                            <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">These principles guide every decision we make.</p>
-                        </div>
-                        <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                            <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg border dark:border-gray-700">
-                                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Accessibility</h3>
-                                <p className="mt-2 text-base text-gray-600 dark:text-gray-400">
-                                    Opportunity should be for everyone. Our platform is free for applicants, ensuring no financial barriers stand in your way.
-                                </p>
-                            </div>
-                            <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg border dark:border-gray-700">
-                                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Empowerment</h3>
-                                <p className="mt-2 text-base text-gray-600 dark:text-gray-400">
-                                    We provide the resources and support you need to make informed career decisions and present your best self to employers.
-                                </p>
-                            </div>
-                            <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg border dark:border-gray-700">
-                                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Integrity</h3>
-                                <p className="mt-2 text-base text-gray-600 dark:text-gray-400">
-                                    All internship listings are vetted to ensure they are legitimate, high-quality opportunities. We are committed to transparency and honesty.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+      {/* Our Story Section */}
+      <section className="py-12 px-4">
+        <div className="container mx-auto">
+          <h2 className="text-4xl font-bold mb-6 text-center">Our Story</h2>
+          <p className="text-lg leading-relaxed mb-4">
+            This platform began as a bold idea—developed single-handedly by me, <strong>Chukkala Pavan Kumar</strong>.
+            With a passion for innovation and a desire to simplify the internship search process, I built the first version from scratch.
+          </p>
+          <p className="text-lg leading-relaxed">
+            Every detail of this platform was thoughtfully designed to serve as a bridge between companies offering internships
+            and enthusiastic candidates looking for opportunities. My personal journey, persistence, and drive are at the heart of every feature.
+          </p>
+        </div>
+      </section>
+
+      {/* Founder Section */}
+      <section className="py-12 bg-gray-100 dark:bg-gray-800 px-4">
+        <div className="container mx-auto flex flex-col md:flex-row items-center gap-8">
+          <div className="w-48 h-48 relative rounded-full overflow-hidden mx-auto">
+            <Image
+              src="/BasicAssets/founder.jpg"
+              alt="Chukkala Pavan Kumar"
+              width={192}
+              height={192}
+              className="object-cover"
+            />
+          </div>
+          <div className="md:flex-1">
+            <h2 className="text-3xl font-bold mb-4">Meet the Founder</h2>
+            <p className="text-lg mb-4">
+              I, Chukkala Pavan Kumar, envisioned a platform that eliminates unnecessary barriers—no need for logins or sign-ups,
+              and with zero user data stored. My drive to empower both companies and candidates has shaped every aspect of this platform.
+            </p>
+            <p className="text-lg">
+              This isn’t just a platform; it’s a movement towards transparency, speed, and excellence in connecting talent with opportunity.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Platform Highlights */}
+      <section className="py-12 px-4">
+        <div className="container mx-auto">
+          <h2 className="text-4xl font-bold mb-6 text-center">Platform Highlights</h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="p-6 border border-gray-200 dark:border-gray-700 rounded-lg">
+              <h3 className="text-2xl font-bold mb-2">Open & Accessible</h3>
+              <p className="text-lg">
+                Unlike other platforms, there’s no login or signup required. Explore internships freely without the need for registration.
+                This open access model ensures that opportunities are never hidden behind unnecessary barriers.
+              </p>
             </div>
-        </main>
-        <Footer />
+            <div className="p-6 border border-gray-200 dark:border-gray-700 rounded-lg">
+              <h3 className="text-2xl font-bold mb-2">High Security</h3>
+              <p className="text-lg">
+                With no user data stored, our platform prioritizes your security and privacy. Enjoy peace of mind as you browse
+                and apply for internships—your information remains completely safe.
+              </p>
+            </div>
+            <div className="p-6 border border-gray-200 dark:border-gray-700 rounded-lg">
+              <h3 className="text-2xl font-bold mb-2">One-on-One Support</h3>
+              <p className="text-lg">
+                Every issue is met with personalized attention. We believe in direct, one-on-one resolution to ensure that your
+                experience remains smooth and hassle-free.
+              </p>
+            </div>
+            <div className="p-6 border border-gray-200 dark:border-gray-700 rounded-lg">
+              <h3 className="text-2xl font-bold mb-2">Speed & Performance</h3>
+              <p className="text-lg">
+                Our platform is built for speed. Lightning-fast load times and smooth transitions make finding your ideal internship
+                a breeze.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Design & UX Section */}
+      <section className="py-12 bg-gray-100 dark:bg-gray-800 px-4">
+        <div className="container mx-auto">
+          <h2 className="text-4xl font-bold mb-6 text-center">Design & User Experience</h2>
+          <p className="text-lg leading-relaxed mb-4">
+            We’re obsessed with great design. The platform boasts a modern, attractive interface that’s responsive across all devices.
+            Every element is crafted to deliver a delightful user experience—ensuring that your journey from browsing to applying is smooth and intuitive.
+          </p>
+          <p className="text-lg leading-relaxed">
+            The aesthetic appeal and intuitive layout not only make the platform visually engaging but also emphasize functionality,
+            setting a new standard for internship portals.
+          </p>
+        </div>
+      </section>
+
+      {/* Call-to-Action Section */}
+      <section className="py-12 px-4">
+        <div className="container mx-auto text-center">
+          <h2 className="text-4xl font-bold mb-6">Join the Revolution</h2>
+          <p className="text-lg mb-6">
+            Whether you're an internship provider or a driven candidate, our platform is designed with you in mind.
+            Dive in, explore the opportunities, and become part of a community that values speed, security, and unmatched design.
+          </p>
+          <Link href="/">
+            <span className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition duration-300">
+              Explore Internships Now
+            </span>
+          </Link>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-200 dark:bg-gray-700 text-center py-6">
+        <p className="text-sm">
+          © {currentYear} Internship Platform. All rights reserved.
+        </p>
+      </footer>
     </div>
   );
-};
-
-export default AboutPage;
+}
