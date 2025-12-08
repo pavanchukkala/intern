@@ -44,7 +44,7 @@ export default function BlogPage({ params }: Props) {
 
   return (
     <div className="w-full flex justify-center">
-      <div className="max-w-4xl w-full px-6 py-10">
+     <div className="max-w-3xl w-full px-6 py-10 leading-relaxed">
         <div className="mb-6 flex items-center justify-between">
           <Link href="/blog" className="text-sm hover:underline">← Back to Blog</Link>
           <div className="text-sm text-muted-foreground">Read time: ~10–15 mins</div>
