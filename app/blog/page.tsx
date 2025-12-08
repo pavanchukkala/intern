@@ -1,108 +1,78 @@
 import fs from "fs";
 import path from "path";
-import NavBar from "@/components/NavBar";
-import Footer from "@/components/Footer";
-import BlogCard from "@/components/BlogCard";
-import SearchBar from "./SearchBar";
+import matter from "gray-matter";
+import Link from "next/link";
 
-export const metadata = {
-  title: "Kegth Blog",
-  description: "Kegth blog - career, internships, tech"
-};
+function getAllBlogs() {
+  const blogDir = path.join(process.cwd(), "public", "blogs");
+  if (!fs.existsSync(blogDir)) return [];
 
-export default function Page({ searchParams }) {
-  const filePath = path.join(process.cwd(), "public", "blogs", "index.json");
-  const posts = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+  return fs.readdirSync(blogDir)
+    .filter((file) => file.endsWith(".md"))
+    .map((file) => {
+      const fullPath = path.join(blogDir, file);
+      const raw = fs.readFileSync(fullPath, "utf8");
+      const { data, content } = matter(raw);
 
-  const activeTag = searchParams.tag;
+      // Extract title from first H1 if no frontmatter title
+      let title = data.title;
+      if (!title) {
+        const match = content.match(/^#\s+(.*)/);
+        title = match ? match[1].trim() : file.replace(/\.md$/, "");
+      }
 
-  const filteredPosts = activeTag
-    ? posts.filter(p => p.tags?.includes(activeTag))
-    : posts;
+      // Create short excerpt for preview
+      const excerpt = content
+        .replace(/^#\s+.*\n?/, "")       // remove title
+        .replace(/\n+/g, " ")
+        .slice(0, 160) + "...";
 
-  const allTags = Array.from(
-    new Set(posts.flatMap(p => p.tags || []))
-  );
+      return {
+        slug: file.replace(".md", ""),
+        title,
+        excerpt,
+        image: data.image || `https://placehold.co/800x400?text=${encodeURIComponent(title)}`,
+      };
+    })
+    .sort((a, b) => a.title.localeCompare(b.title)); // alphabetical
+}
+
+export default function BlogIndexPage() {
+  const blogs = getAllBlogs();
 
   return (
-    <div className="min-h-screen bg-[#fafafa] text-gray-800">
-      <NavBar />
+    <div className="max-w-6xl mx-auto px-6 py-12">
+      <h1 className="text-4xl font-bold mb-10">Explore All Blogs</h1>
 
-      <main className="container mx-auto px-4 py-10">
-        <header className="text-center mb-10">
-          <h1 className="text-4xl font-extrabold tracking-tight">
-            Kegth Blog Library
-          </h1>
-          <p className="mt-2 text-gray-600">
-            In-depth guides, internship tips and industry insights.
-          </p>
-        </header>
+      {blogs.length === 0 && (
+        <div className="text-muted-foreground">No blogs found.</div>
+      )}
 
-        <div className="flex gap-8">
-          {/* LEFT SECTION */}
-          <div className="flex-1">
-            <SearchBar />
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {blogs.map((blog) => (
+          <Link
+            key={blog.slug}
+            href={`/blog/${blog.slug}`}
+            className="group border rounded-lg overflow-hidden hover:shadow-lg transition-shadow bg-white dark:bg-neutral-900"
+          >
+            <img
+              src={blog.image}
+              alt={blog.title}
+              className="w-full h-40 object-cover"
+            />
 
-            <div id="grid" className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredPosts.map(p => (
-                <div
-                  key={p.slug}
-                  data-title={p.title}
-                  data-tags={(p.tags || []).join(" ")}
-                >
-                  <BlogCard post={p} />
-                </div>
-              ))}
+            <div className="p-5">
+              <h2 className="text-xl font-semibold group-hover:underline mb-2">
+                {blog.title}
+              </h2>
+
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {blog.excerpt}
+              </p>
             </div>
-          </div>
-
-          {/* SIDEBAR */}
-          <aside className="w-80 hidden lg:block">
-            {/* Filters */}
-            <div className="p-4 bg-white rounded-xl shadow-sm border border-gray-100">
-              <h3 className="font-semibold text-lg mb-2">Filters</h3>
-              <div className="flex flex-wrap gap-2">
-                {allTags.map(tag => (
-                  <a
-                    key={tag}
-                    href={`/blog?tag=${encodeURIComponent(tag)}`}
-                    className={`px-3 py-1 rounded-full text-sm border ${
-                      activeTag === tag
-                        ? "bg-black text-white border-black"
-                        : "bg-gray-100 text-gray-800 hover:bg-gray-200"
-                    }`}
-                  >
-                    {tag}
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            {/* Featured Posts */}
-            <div className="mt-6 p-4 bg-white rounded-xl shadow-sm border border-gray-100">
-              <h3 className="font-semibold text-lg">Featured</h3>
-              {posts
-                .filter(p => p.featured)
-                .slice(0, 3)
-                .map(fp => (
-                  <div key={fp.slug} className="mt-4">
-                    <a
-                      href={`/blog/${fp.slug}`}
-                      className="text-sm font-medium hover:underline"
-                    >
-                      {fp.title}
-                    </a>
-                    <p className="text-xs text-gray-500 mt-1">
-                      {fp.excerpt.slice(0, 80)}...
-                    </p>
-                  </div>
-                ))}
-            </div>
-          </aside>
-        </div>
-      </main>
-
-      <Footer />
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }
