@@ -71,6 +71,7 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#ffffff" />
         <meta name="description" content="Find internships in tech, medical, and business fields." />
+        <meta name="7searchppc" content="b9534978aef60a51f19acb013cbc8097"/>
 
         {/* Favicon and manifest */}
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
