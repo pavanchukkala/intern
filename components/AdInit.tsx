@@ -2,17 +2,23 @@
 "use client";
 import { useEffect } from "react";
 
-function waitFor(fnName: string, timeout = 5000, interval = 200) {
-  return new Promise<void>((resolve, reject) => {
+/**
+ * Safe, minimal initializer for 7searchppc vendor functions.
+ * It waits a short time for vendor functions and calls them if present.
+ * Adjust IDs/timeouts if needed.
+ */
+
+function waitFor(fnName: string, timeout = 8000, interval = 250) {
+  return new Promise<void>((resolve) => {
     const start = Date.now();
-    const handle = setInterval(() => {
+    const iv = setInterval(() => {
       // @ts-ignore
       if (typeof (window as any)[fnName] === "function") {
-        clearInterval(handle);
+        clearInterval(iv);
         resolve();
       } else if (Date.now() - start > timeout) {
-        clearInterval(handle);
-        reject(new Error(`${fnName} not found after ${timeout}ms`));
+        clearInterval(iv);
+        resolve(); // resolve anyway, we handle missing functions gracefully
       }
     }, interval);
   });
@@ -23,22 +29,22 @@ export default function AdInit() {
     let mounted = true;
 
     async function initAll() {
-      try {
-        // wait for initAd (popunder) as an example
-        await waitFor("initAd", 8000).catch(()=>{ /* ignore if missing */ });
+      await Promise.all([
+        waitFor("initAd"),
+        waitFor("initSocialAd"),
+        waitFor("initNativeAd"),
+        waitFor("initBannerAd"),
+        waitFor("initTextAd"),
+      ]);
 
-        if (!mounted) return;
+      if (!mounted) return;
 
-        // call initializers if they exist
-        // Example IDs (replace with your real IDs)
-        try { /* @ts-ignore */ window.initAd && window.initAd(['7SAD1569931FE9A3CA4','popunder']); } catch(e){}
-        try { /* @ts-ignore */ window.initSocialAd && window.initSocialAd(['7SAD1569931FD995AB7','social']); } catch(e){}
-        try { /* @ts-ignore */ window.initNativeAd && window.initNativeAd(['7SAD1569931FC4723C9','native', 4]); } catch(e){}
-        try { /* @ts-ignore */ window.initBannerAd && window.initBannerAd(['7SAD1569931DB11B66E','banner', 1]); } catch(e){}
-        try { /* @ts-ignore */ window.initTextAd && window.initTextAd(['7SAD1569931D19BE7D5','text']); } catch(e){}
-      } catch (err) {
-        // console.warn("Ad init error", err);
-      }
+      const w = window as any;
+      try { w.initAd && w.initAd(["7SAD1569931FE9A3CA4", "popunder"]); } catch {}
+      try { w.initSocialAd && w.initSocialAd(["7SAD1569931FD995AB7", "social"]); } catch {}
+      try { w.initNativeAd && w.initNativeAd(["7SAD1569931FC4723C9", "native", 4]); } catch {}
+      try { w.initBannerAd && w.initBannerAd(["7SAD1569931DB11B66E", "banner", 1]); } catch {}
+      try { w.initTextAd && w.initTextAd(["7SAD1569931D19BE7D5", "text"]); } catch {}
     }
 
     initAll();
