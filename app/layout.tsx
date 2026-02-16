@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import AdInit from "../components/AdInit";
 import Script from "next/script";
 import './globals.css'
 
