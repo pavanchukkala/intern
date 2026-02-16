@@ -11,6 +11,10 @@ export default function BlogCard({post}){
           <Link href={`/blog/${post.slug}`} className="text-indigo-600">Read more →</Link>
         </div>
       </div>
+      <div className="mt-3 text-ad-inline">
+  <div id="7SAD1569931D19BE7D5" data-7pub="7SAD1569931D19BE7D5"></div>
+</div>
+
     </article>
   );
 }
