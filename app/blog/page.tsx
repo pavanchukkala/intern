@@ -73,6 +73,13 @@ export default function BlogIndexPage() {
           </Link>
         ))}
       </div>
+      <div id="7SAD1569931DB11B66E" data-7pub="7SAD1569931DB11B66E"></div>
+                      <script src="https://code.adclickppc.com/7s-banner-ad.js"></script>
+                      <script>
+                      (function() {
+                        initBannerAd(['7SAD1569931DB11B66E', 'banner',  1])
+                        }())
+                      </script>
     </div>
   );
 }
