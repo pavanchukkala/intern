@@ -13,5 +13,9 @@ export default function BlogLayout({ children }: { children: React.ReactNode }) 
       </main>
       <Footer />
     </div>
+    <div className="blog-social-ad hidden lg:block">
+  <div id="7SAD1569931FD995AB7" data-7pub="7SAD1569931FD995AB7"></div>
+</div>
+
   );
 }
