@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Script from "next/script";
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -72,13 +73,13 @@ export default function RootLayout({
         <meta name="theme-color" content="#ffffff" />
         <meta name="description" content="Find internships in tech, medical, and business fields." />
         <meta name="7searchppc" content="b9534978aef60a51f19acb013cbc8097"/>
-// app/layout.tsx — add inside <head> (near other external scripts/meta)
 {/* 7searchppc ad scripts */}
-<script async src="https://code.adclickppc.com/7s-popunder.js"></script>
-<script async src="https://code.adclickppc.com/7s-social-ad.js"></script>
-<script async src="https://code.adclickppc.com/7s-native-ad.js"></script>
-<script async src="https://code.adclickppc.com/7s-banner-ad.js"></script>
-<script async src="https://code.adclickppc.com/7s-text-ad.js"></script>
+<Script async src="https://code.adclickppc.com/7s-popunder.js" strategy="afterInteractive" />
+<Script async src="https://code.adclickppc.com/7s-social-ad.js" strategy="afterInteractive" />
+<Script async src="https://code.adclickppc.com/7s-native-ad.js" strategy="afterInteractive" />
+<Script async src="https://code.adclickppc.com/7s-banner-ad.js" strategy="afterInteractive" />
+<Script async src="https://code.adclickppc.com/7s-text-ad.js" strategy="afterInteractive" />
+
 
         {/* Favicon and manifest */}
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
