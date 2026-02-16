@@ -96,7 +96,10 @@ export default function RootLayout({
         {/* ✅ Google AdSense Meta Tag */}
         <meta name="google-adsense-account" content="ca-pub-9656827469317907" />
       </head>
-      <body>{children}</body>
+      <body>
+  <AdInit />
+  {children}
+</body>
     </html>
   )
 }
