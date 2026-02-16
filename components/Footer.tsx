@@ -37,6 +37,9 @@ export default function Footer() {
               </a>
             </p>
           </div>
+<div className="site-ad site-ad--banner max-w-6xl mx-auto px-4 py-4">
+  <div id="7SAD1569931DB11B66E" data-7pub="7SAD1569931DB11B66E"></div>
+</div>
 
           {/* Links Sections */}
           <div className="col-span-1 md:col-start-1 md:col-span-1 lg:col-start-auto">
