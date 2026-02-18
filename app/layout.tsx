@@ -67,39 +67,26 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        {/* Meta tags */}
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#ffffff" />
-        <meta name="description" content="Find internships in tech, medical, and business fields." />
-        <meta name="7searchppc" content="b9534978aef60a51f19acb013cbc8097"/>
-{/* 7searchppc ad scripts */}
-<Script async src="https://code.adclickppc.com/7s-popunder.js" strategy="afterInteractive" />
-<Script async src="https://code.adclickppc.com/7s-social-ad.js" strategy="afterInteractive" />
-<Script async src="https://code.adclickppc.com/7s-native-ad.js" strategy="afterInteractive" />
-<Script async src="https://code.adclickppc.com/7s-banner-ad.js" strategy="afterInteractive" />
-<Script async src="https://code.adclickppc.com/7s-text-ad.js" strategy="afterInteractive" />
-
-
-        {/* Favicon and manifest */}
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="shortcut icon" href="/favicon.ico" />
-        <link rel="manifest" href="/site.webmanifest" />
-
-        {/* Optional: MS Application support */}
-        <meta name="msapplication-TileColor" content="#ffffff" />
-        <meta name="msapplication-TileImage" content="/android-chrome-192x192.png" />
-
-        {/* ✅ Google AdSense Meta Tag */}
-        <meta name="google-adsense-account" content="ca-pub-9656827469317907" />
-      </head>
       <body>
-  <AdInit />
-  {children}
-</body>
+        {/* 7searchppc Ad Initialization & Scripts */}
+        <AdInit />
+
+        {/* Load all 7searchppc ad libraries (non-blocking) */}
+        <Script src="https://code.adclickppc.com/7s-popunder.js" strategy="afterInteractive" />
+        <Script src="https://code.adclickppc.com/7s-social-ad.js" strategy="afterInteractive" />
+        <Script src="https://code.adclickppc.com/7s-native-ad.js" strategy="afterInteractive" />
+        <Script src="https://code.adclickppc.com/7s-banner-ad.js" strategy="afterInteractive" />
+        <Script src="https://code.adclickppc.com/7s-text-ad.js" strategy="afterInteractive" />
+
+        {/* Popunder Ad Container (hidden, global) */}
+        <div 
+          id="7SAD1569931FE9A3CA4" 
+          data-7pub="7SAD1569931FE9A3CA4" 
+          style={{ display: 'none' }} 
+        />
+
+        {children}
+      </body>
     </html>
-  )
+  );
 }
