@@ -1,0 +1,9 @@
+'use client';
+
+export default function BannerAd() {
+  return (
+    <div className="my-8 w-full flex justify-center">
+      <div id="7SAD1569931DB11B66E" data-7pub="7SAD1569931DB11B66E" className="max-w-[728px] w-full" />
+    </div>
+  );
+}
