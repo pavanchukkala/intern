@@ -1,0 +1,9 @@
+'use client';
+
+export default function NativeAd() {
+  return (
+    <div className="my-8">
+      <div id="7SAD1569931FC4723C9" data-7pub="7SAD1569931FC4723C9" className="w-full" />
+    </div>
+  );
+}
